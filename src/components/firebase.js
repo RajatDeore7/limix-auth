@@ -7,12 +7,13 @@ import { getFirestore } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyApJgb0bNyUioLNNeReMCRD2Bw1YicNLKc",
-  authDomain: "limix-db.firebaseapp.com",
-  projectId: "limix-db",
-  storageBucket: "limix-db.firebasestorage.app",
-  messagingSenderId: "689714910493",
-  appId: "1:689714910493:web:523ae45f043b63c8503df4"
+  apiKey: "AIzaSyDhkz8_TO_zS3Rqxm6cXB3oJw8tW13HcEk",
+  authDomain: "limix-ai.firebaseapp.com",
+  projectId: "limix-ai",
+  storageBucket: "limix-ai.firebasestorage.app",
+  messagingSenderId: "423260429907",
+  appId: "1:423260429907:web:cf45fc1642b103708330a6",
+  measurementId: "G-YHT7397LYM"
 };
 
 // Initialize Firebase
