@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { auth, db } from "./firebase";
 import { setDoc, doc } from "firebase/firestore";
 import { toast } from "react-toastify";
+import { sendDataToGoogleSheets } from "./googleSheets";
 
 function Register() {
   const [email, setEmail] = useState("");
@@ -15,25 +16,31 @@ function Register() {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
       const user = auth.currentUser;
-      console.log('User Details :', user);
+      console.log("User Details:", user);
+
       if (user) {
-        await setDoc(doc(db, "Users", user.uid), {
-          email: user.email,
+        const userData = {
           firstName: fname,
-          lastName: lname
-        });
+          lastName: lname,
+          email: user.email,
+        };
+
+        // Store in Firestore
+        await setDoc(doc(db, "Users", user.uid), userData);
+
+        console.log("Sending to Google Sheets:", userData);
+        await sendDataToGoogleSheets(userData);
+
       }
+
       console.log("User Registered Successfully!!");
-      toast.success("User Registered Successfully!!", {
-        position: "top-center",
-      });
+      toast.success("User Registered Successfully!!", { position: "top-center" });
     } catch (error) {
       console.log(error.message);
-      toast.error(error.message, {
-        position: "bottom-center",
-      });
+      toast.error(error.message, { position: "bottom-center" });
     }
   };
+
 
   return (
     <form onSubmit={handleRegister}>
